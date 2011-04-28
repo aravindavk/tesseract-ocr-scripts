@@ -14,7 +14,9 @@ def repair_text(line):
     while i < num_letters:
         # If substitution of letter required
         if text[i] == "|" and text[i+1] == "e":
-            output[-1] = to_convert[text[i - 1]] # change the previous letter
+            if text[ i - 1] in to_convert and len(output) > 0:
+                output[-1] = to_convert[text[i - 1]] # change the previous letter
+                
             i += 2
         else :
             output += [text[i]] # Normal flow - No change
