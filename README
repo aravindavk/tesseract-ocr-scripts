@@ -1,0 +1,8 @@
+This script will be used to process the output of Tesseract OCR of Kannada.
+
+[TODO] Explain with case/examples
+
+## Usage:
+
+    python3 repair_text.py input_file output_file
+
