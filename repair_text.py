@@ -4,6 +4,42 @@ import sys
 import os
 
 to_convert = {"ಿ": "ೀ", "ೆ":"ೇ", "ೊ":"ೋ"}
+broken_dict = {"ೆ":"ೊ"}
+
+def repair_broken(line):
+    text = list(line)
+    num_letters = len(text)
+
+    i = 0
+
+    output = []
+    while i < num_letters:
+        # Broken case like u case, example ku 
+        if text[i] == "\\" and text[i+1] == "2":
+            output += ["ು"]
+            i += 2
+        # Broken case like kU or Ko case
+        elif text[i] == "\\" and text[i+1] == "3":
+            if output[-1] in broken_dict:
+                output[-1] = broken_dict[text[i - 1]]
+            else :
+                output += ["ೂ"]
+            i += 2
+        # Broken case like KRu
+        elif text[i] == "\\" and text[i+1] == "4":
+            output += ["ೃ"]
+            i += 2
+        # Broken case like Kai
+        elif text[i] == "\\" and text[i+1] == "5":
+            output[-1] = "ೈ"
+            i += 2                        
+        else :
+            output += [text[i]] # Normal flow - No change
+            i += 1
+            
+    return "".join(output)
+
+
 
 def repair_text(line):
     text = list(line)
@@ -13,7 +49,7 @@ def repair_text(line):
     output = []
     while i < num_letters:
         # If substitution of letter required
-        if text[i] == "|" and text[i+1] == "e":
+        if text[i] == "\\" and text[i+1] == "1":
             if text[ i - 1] in to_convert and len(output) > 0:
                 output[-1] = to_convert[text[i - 1]] # change the previous letter
                 
@@ -48,6 +84,6 @@ if __name__ == "__main__":
 
         # Process each line and convert
         for line in f:
-            f_out.write(repair_text(line))       
+            f_out.write(repair_text(repair_broken(line)))       
 
         print ("[OK] processed ", input_file, ", Written ", output_file )
