@@ -21,8 +21,6 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 
-use File::Slurp;
-
 # If required number of arguments not given(-1 is file name, 0 is first, 1 is second)
 if ($#ARGV != 1 ) {
 	print "usage: perl ocr-dict.pl in_file out_file\n";
