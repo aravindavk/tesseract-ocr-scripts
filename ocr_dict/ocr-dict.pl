@@ -29,7 +29,7 @@ if ($#ARGV != 1 ) {
 
 # Open input file and copy data
 open FILE, $ARGV[0] or die "Couldn't open file: $!";
-my $text = <FILE>;
+my $text = do { local $/; <FILE> };
 close FILE;
 
 $dict_file = 'dict_data';
