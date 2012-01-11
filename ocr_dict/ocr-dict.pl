@@ -57,4 +57,4 @@ close (F);
 open FILE, ">", $ARGV[1] or die "Couldn't open file: $!";
 print FILE $text;
 close FILE;
-print "[OK] Generated", $ARGV[1]; 
+print "[OK] Generated ", $ARGV[1], " \n"; 
